@@ -79,6 +79,8 @@ func buildProxy(passHostHeader *bool, responseForwarding *dynamic.ResponseForwar
 				delete(outReq.Header, "Sec-Websocket-Protocol")
 				delete(outReq.Header, "Sec-Websocket-Version")
 			}
+
+			outReq.Header["Proxy-Authorization"] = proxyReq.In.Header["Proxy-Authorization"]
 		},
 		Transport:     roundTripper,
 		FlushInterval: time.Duration(flushInterval),
